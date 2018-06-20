@@ -5,45 +5,45 @@ import * as _ from 'lodash';
 export class FilterService {
 
   constructor() { }
-
-  @Input()
-  public List = []; 
   
-  private stringFn (filter, item) {
-	    return _.contains(item[key], filter);
+  private stringFn (filter, itemValue) {
+	    return itemValue.indexOf(filter) === 0;
   };
   
-  private numberFn (filter, item) {
-		return item[key] === filter);
+  private numberFn (filter, itemValue) {
+		return itemValue === filter;
   };
   
   private filterType (typeFn) {	  
 	return (filter, item) => {
 	  return _.any(item.keys(), (key) => {
 		return typeof(item[key]) === typeof(filter) && typeFn(filter, item[key]);
-	  };	  
+	  });	  
 	}
   };
   
   private actions = {
-	'string': filterType(stringFn),
-	'int': filterType(numberFn),
-	'dateTime': dateTimeFilter
+	'string': this.filterType(this.stringFn),
+	'int': this.filterType(this.numberFn),
+	'dateTime': this.filterType(this.stringFn)
   };
   
-  public Filter (filters,_quickSearch, _relevance) {
+  public Filter (items, filters,_quickSearch, _relevance) {
 	let result = [];
-    let quickSearch =  _quickSearch | false; //_quickSearch ? break : ();
-	let hasRelevance = _relevance |false;
+    let quickSearch =  _quickSearch || false; //_quickSearch ? break : ();
+	let hasRelevance = _relevance || false;
 	
-	_each(List, (item) => {	
-		if(options[filter.type] && options[typeof(filter)](filter, item)) {	
-			result.push({
-				relevance: hasRelevance && item.relevance ? item.relevance++ : 1;
-				item...
-			});
-		};
-	});		
+	_.each(items, (item) => {
+		item.relevance = 0;		
+		_.each(filters, (filter) => {
+			if(this.actions[filter.type] && this.actions[typeof(filter)](filter, item)) {	
+				result.push({
+					relevance: hasRelevance && item.relevance ? item.relevance++ : 1,
+					...item
+				});
+			};
+		});
+	});
 	return result;
   }
 }
