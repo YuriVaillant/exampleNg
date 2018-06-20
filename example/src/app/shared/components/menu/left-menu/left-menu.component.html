@@ -1,0 +1,12 @@
+<div>
+	<ul>
+		<li *ngFor="let button of buttons" (mouseenter)="onMouseEnter(button)" (mouseleave)="onMouseLeave(button)">
+			 
+			<i class="fas fa-{{button.icon}}" (click)="onClick(button)" ></i>
+			<span (click)="onClick(button)" >{{button.name}}</span>
+			<div *ngIf="button.isOpen" class="popoverContainer" >
+				<app-left-menu [buttons]="button.children"></app-left-menu>
+			</div >
+		</li>	
+	</ul>
+</div>
