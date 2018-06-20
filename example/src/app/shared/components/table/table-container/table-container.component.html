@@ -1,0 +1,12 @@
+<table>
+	<thead>
+		<app-table-header [titles]="List[0].keys()"></app-table-header>
+	</thead>
+	<tbody>
+		<app-filter-row [titles]="List[0].keys()" [values]="FilterValues"></app-filter-row>
+	</tbody>
+	<tbody *ngFor="let item of VisibleList">
+		<app-table-row [item]="item"></app-table-row>
+	</tbody>
+	<tr></tr>
+</table>
