@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-table-row',
@@ -8,6 +8,10 @@ import { Component, OnInit } from '@angular/core';
 export class TableRowComponent implements OnInit {
 
   constructor() { }
+0
+
+  @Input()
+  public item;
 
   ngOnInit() {
   }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-table-header',
@@ -6,6 +6,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./table-header.component.css']
 })
 export class TableHeaderComponent implements OnInit {
+
+
+	@Input()
+	public titles;
 
   constructor() { }
 
