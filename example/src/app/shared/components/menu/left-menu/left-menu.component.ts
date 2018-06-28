@@ -1,4 +1,4 @@
-import { Component, OnInit, Input,  trigger, state, style, transition, animate } from '@angular/core';
+import { Component, OnInit, Input, } from '@angular/core';
 import { TargetState, StateService } from '@uirouter/core';
 import { MenuService } from '../../../entities/menu.service';
 
@@ -6,17 +6,7 @@ import { MenuService } from '../../../entities/menu.service';
   selector: 'app-left-menu',
   templateUrl: './left-menu.component.html',
   styleUrls: ['./left-menu.component.css'],
-   animations : [
-    trigger('hoverState', [
-      state('false', style({
-        transform: 'opacity(0)'
-      })),
-      state('true',   style({
-        transform: 'opacity(1)'
-      })),
-      transition('false <=> true', animate('1000ms ease-in-out'))
-    ])
-  ]
+   animations : []
 })
 export class LeftMenuComponent implements OnInit {
 
@@ -32,7 +22,8 @@ export class LeftMenuComponent implements OnInit {
   
   get buttons(): Array<any> { return this._buttons}
   
-  onClick(button) {
+  public onClick(button) {
+	  debugger;
 	  this.$state.go(button.uri);
   }
   
